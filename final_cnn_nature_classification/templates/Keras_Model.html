@@ -1,0 +1,46 @@
+<html>
+<head>
+<title> Keras Model</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Allerta+Stencil">
+<style>
+*{background-color: black;
+}
+.split {
+  height: 100%;
+  width: 0%;
+position: fixed;
+  z-index: 1;
+  top: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+.left {
+  left: 0;
+  top: 45px;
+  left: 0;
+  width: 20vw;
+  height: 100vh;
+  background-color: black;
+}
+
+/* Control the right side */
+.right {
+ top: 45px;
+right:0;
+  height: 100vh;
+  width: 80vw;
+  background-color: black
+  
+  
+}
+</style>
+<h1 style= "color:white;text-align:center;font-family: Allerta Stencil, Sans-serif; font-size: 35px";> TRAINING CNNs</h1>
+<div class="split left">
+
+<img src={{ url_for('static', filename='img/model_plott.png')}} style="height:90%; width:100%";>
+</div>
+<div class="split right">
+
+<img src={{ url_for('static', filename='img/train_steps.png')}} style="height:90%; width:100%";>
+</div>
+</html>

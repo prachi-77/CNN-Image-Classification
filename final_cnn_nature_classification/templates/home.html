@@ -1,0 +1,25 @@
+<html>
+<head>
+<title> Welcome </title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Allerta+Stencil">
+
+<link rel="stylesheet" href={{url_for('static',filename='css/style.css') }}>
+<img src= {{ url_for('static', filename='img/star.jpg') }} alt="Machine-Learning" class="bg"> 
+</head>
+<body>
+
+<div class="topnav">
+  <a class="#about" href="{{ url_for('Keras_Model') }}">Training CNN</a>
+  <a href="{{ url_for('CNN_Model') }}" >Model Envision</a>
+  <a href="#home">Home</a>
+</div>
+<center><h1> IMAGE RECOGNITION MADE EASY</h1></center>
+    
+<form action="{{url_for('about') }}">
+
+         <div class="crash">
+          <button type="submit" class="crash">Lets Get Started</button>
+      </form>
+</div>
+</body>
+</html>

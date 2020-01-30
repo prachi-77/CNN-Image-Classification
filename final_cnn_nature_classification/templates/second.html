@@ -1,0 +1,175 @@
+<html>
+<head>
+<title> Prediction App </title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Allerta+Stencil">
+<img src= {{ url_for('static', filename='img/star.jpg') }} alt="Gif image">
+<style>
+.split {
+  height: 100%;
+  width: 50%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+.left {
+  left:0;
+  background-color: black;
+ 
+}
+
+/* Control the right side */
+.right {
+  right: 0;
+  background-color: #ffeaa7;
+  
+}
+
+/* If you want the content centered horizontally and vertically */
+.centered {
+
+  top: 60%;
+  left: 50%;
+  
+  bottom:60px;
+  text-align: center;
+}
+#image-selector {
+  
+  border: none;
+  color: #555555;
+  padding: 10px 10px;
+  top:-30px;
+
+ right:40px;
+  text-decoration: none;
+
+  font-size: 20px;
+}
+#predict-button{
+	border: none;
+  color: #555555;
+  padding: 10px 10px;
+  top:-40px;
+
+ right:50px;
+  text-decoration: none;
+
+font-size: 30px;}
+	
+h1 {
+ top: 5px;
+  font-family: "Allerta Stencil", Sans-serif;
+  color: black;
+ 
+
+  font-size: 50px;
+}
+h2{
+ top: 5px;
+  font-family: "Allerta Stencil", Sans-serif;
+  color: #81ecec;
+ 
+
+  font-size: 40px;
+}
+h3{
+ top: 5px;
+  font-family: "Allerta Stencil", Sans-serif;
+  color: white;
+ 
+
+  font-size: 35px;
+}
+.url{
+	 text-align:center;
+	 left: 50px;
+	 font-family: "Allerta Stencil", Sans-serif;
+	 text-decoration: underline;
+	 font-size: 50px;
+}
+.centered img{
+	
+ right:40px;
+	
+}
+.lash{
+
+	
+  
+  color: #fab1a0;
+  background-color:	black;
+
+  text-align: center;
+position:absolute;
+  font-size: 35px;
+  left:38%;
+  top:90%;
+    box-sizing: border-box;
+	 
+
+  }
+</style>
+ </head>
+    
+<body>
+<div class="split left">
+<center><h1 style="color:#C4E538"; >Prediction through our own MODEL</h1></center>
+<center> <img src= {{ url_for('static', filename='img/giphy.gif') }} alt="Gif image" style="top:100px";> </center>
+<center> <h2 > Accuracy-80% </h2> </center>
+<center><h3> Didn't like the accuracy or prediction of this model ? Let's try another model ! </h3>/center>
+<form action="{{url_for('vgg16') }}">
+
+         <div class="crash">
+          <center><button type="submit" class="lash">Lets Predict Again</button></center>
+      </form>
+</div>
+
+<div class="split right">
+  
+    <h1> Classify your favourite image using Deep Learning</h1>
+<p class="url"> Enter the URL for image </p> 
+
+
+<div class= "centered">
+        
+	<input id="image-selector" type="file" >
+	<button id="predict-button"> Predict </button>
+
+<p class="url"> Prediction- <span id="dog-prediction"> </span> </p>
+<img id= "selected-image" src="/"></div>
+  </div> 
+    <script>
+        let base64Image;
+        $("#image-selector").change(function() {
+            let reader = new FileReader();
+            reader.onload = function(e) {
+                let dataURL = reader.result;
+                $('#selected-image').attr("src", dataURL);
+                base64Image = dataURL.replace("data:image/jpeg;base64,","");
+
+                console.log(base64Image);
+            }
+            reader.readAsDataURL($("#image-selector")[0].files[0]);
+            $("#dog-prediction").text("");
+            });
+
+        $("#predict-button").click(function(event){
+            let message = {
+                image: base64Image
+            }
+            console.log(message);
+            $.post("http://127.0.0.1:5000/predict", JSON.stringify(message), function(response){
+                $("#dog-prediction").text(response.prediction.prediction);
+                
+                console.log(response);
+            });
+        });
+    </script>
+
+</body>
+</html>
